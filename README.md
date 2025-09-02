@@ -295,11 +295,6 @@ npm run build
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 ## 👨‍💻 Author
 
@@ -307,24 +302,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - GitHub: [@hariharan-sudhagar](https://github.com/hariharan-sudhagar)
 - Email: your.email@example.com
 
----
-
-## 🆘 Support
-
-For support, email support@restaurant-pos.com or create an issue in the repository.
-
----
-
-## 🔮 Future Enhancements
-
-- [ ] Multi-restaurant support
-- [ ] Advanced analytics with ML insights
-- [ ] Integration with popular payment gateways
-- [ ] Inventory management system
-- [ ] Customer loyalty program
-- [ ] Voice ordering capabilities
-- [ ] AI-powered menu recommendations
-
----
-
-**⭐ If you found this project helpful, please give it a star!**
