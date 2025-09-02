@@ -229,8 +229,6 @@ APP_URL=http://localhost
 
 ## 🔐 Security Features
 
-- ✅ JWT token-based authentication
-- ✅ Password encryption (bcrypt)
 - ✅ CORS protection
 - ✅ SQL injection prevention
 - ✅ XSS protection
@@ -305,13 +303,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Hariharan Sudhagar**
 - GitHub: [@hariharan-sudhagar](https://github.com/hariharan-sudhagar)
-- Email: your.email@example.com
+- Email: hariharansudhagar18.com
 
----
-
-## 🆘 Support
-
-For support, email support@restaurant-pos.com or create an issue in the repository.
 
 ---
 
@@ -325,6 +318,4 @@ For support, email support@restaurant-pos.com or create an issue in the reposito
 - [ ] Voice ordering capabilities
 - [ ] AI-powered menu recommendations
 
----
 
-**⭐ If you found this project helpful, please give it a star!**
