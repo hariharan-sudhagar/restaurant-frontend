@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://13.49.224.75/api/menu"; // Replace with your API endpoint
+// ✅ Use relative path so Netlify _redirects works
+const API_URL = "/api/menu";
 
 const MenuManagement = () => {
   const [menu, setMenu] = useState([]);
@@ -87,28 +88,26 @@ const MenuManagement = () => {
     }
   };
 
-const handleUpdate = async (id) => {
-  try {
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("description", formData.description);
-    data.append("price", formData.price);
-    if (formData.image) data.append("image", formData.image);
-    if (formData.image_url) data.append("image_url", formData.image_url);
+  const handleUpdate = async (id) => {
+    try {
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("description", formData.description);
+      data.append("price", formData.price);
+      if (formData.image) data.append("image", formData.image);
+      if (formData.image_url) data.append("image_url", formData.image_url);
 
-    await axios.patch(`${API_URL}/${id}`, data, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+      await axios.patch(`${API_URL}/${id}`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    fetchMenu();
-    handleCancel();
-  } catch (err) {
-    console.error("Error updating item:", err);
-    setError("Failed to update item");
-  }
-};
-
-
+      fetchMenu();
+      handleCancel();
+    } catch (err) {
+      console.error("Error updating item:", err);
+      setError("Failed to update item");
+    }
+  };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this menu item?")) return;
@@ -215,7 +214,6 @@ const handleUpdate = async (id) => {
             ) : (
               menu.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-50 border-b">
-                  {/* Image */}
                   <td className="border p-1">
                     {item.image_url ? (
                       <img
@@ -236,8 +234,6 @@ const handleUpdate = async (id) => {
                       ?
                     </div>
                   </td>
-
-                  {/* Name */}
                   <td className="border p-1">
                     {editingItem === item.id ? (
                       <input
@@ -253,8 +249,6 @@ const handleUpdate = async (id) => {
                       </div>
                     )}
                   </td>
-
-                  {/* Description */}
                   <td className="border p-1">
                     {editingItem === item.id ? (
                       <textarea
@@ -272,8 +266,6 @@ const handleUpdate = async (id) => {
                       </div>
                     )}
                   </td>
-
-                  {/* Price */}
                   <td className="border p-1">
                     {editingItem === item.id ? (
                       <input
@@ -291,8 +283,6 @@ const handleUpdate = async (id) => {
                       </span>
                     )}
                   </td>
-
-                  {/* Actions */}
                   <td className="border p-1">
                     {editingItem === item.id ? (
                       <div className="space-y-1">
