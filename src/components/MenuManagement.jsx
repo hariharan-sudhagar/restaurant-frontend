@@ -19,19 +19,21 @@ const MenuManagement = () => {
   });
 
   // Fetch menu items
-  const fetchMenu = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const res = await axios.get(API_URL);
-      setMenu(res.data);
-    } catch (err) {
-      console.error("Error fetching menu:", err);
-      setError("Failed to fetch menu items");
-    } finally {
-      setLoading(false);
-    }
-  };
+const fetchMenu = async () => {
+  try {
+    setLoading(true);
+    setError(null);
+    const res = await axios.get(API_URL);
+    console.log("API Response:", res.data); // 👈 Check the format
+    setMenu(res.data.data || res.data || []); // handles both formats
+  } catch (err) {
+    console.error("Error fetching menu:", err);
+    setError("Failed to fetch menu items");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     fetchMenu();
