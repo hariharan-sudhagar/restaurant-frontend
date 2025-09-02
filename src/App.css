@@ -142,3 +142,10 @@ input:focus-visible {
     --border-primary: #ffffff;
   }
 }
+
+table img {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: cover;
+  border-radius: 8px;
+}
