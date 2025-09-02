@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-// ✅ Use relative path so Netlify _redirects works
-const API_URL = "/api/menu";
+const API_URL = "/api/menu"; // Netlify proxy will forward this
 
 const MenuManagement = () => {
   const [menu, setMenu] = useState([]);
@@ -19,21 +18,29 @@ const MenuManagement = () => {
   });
 
   // Fetch menu items
-const fetchMenu = async () => {
-  try {
-    setLoading(true);
-    setError(null);
-    const res = await axios.get(API_URL);
-    console.log("API Response:", res.data); // 👈 Check the format
-    setMenu(res.data.data || res.data || []); // handles both formats
-  } catch (err) {
-    console.error("Error fetching menu:", err);
-    setError("Failed to fetch menu items");
-  } finally {
-    setLoading(false);
-  }
-};
+  const fetchMenu = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await axios.get(API_URL);
 
+      // ✅ Ensure menu is always an array
+      if (Array.isArray(res.data)) {
+        setMenu(res.data);
+      } else if (res.data?.data && Array.isArray(res.data.data)) {
+        setMenu(res.data.data);
+      } else {
+        console.error("Unexpected API response:", res.data);
+        setMenu([]);
+      }
+    } catch (err) {
+      console.error("Error fetching menu:", err);
+      setError("Failed to fetch menu items");
+      setMenu([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchMenu();
@@ -222,19 +229,12 @@ const fetchMenu = async () => {
                         src={item.image_url}
                         alt={item.name || "Menu item"}
                         className="w-10 h-10 object-cover rounded border mx-auto"
-                        style={{ maxWidth: "40px", maxHeight: "40px" }}
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                          e.target.nextSibling.style.display = "flex";
-                        }}
                       />
-                    ) : null}
-                    <div
-                      className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs"
-                      style={{ display: item.image_url ? "none" : "flex" }}
-                    >
-                      ?
-                    </div>
+                    ) : (
+                      <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
+                        ?
+                      </div>
+                    )}
                   </td>
                   <td className="border p-1">
                     {editingItem === item.id ? (
@@ -262,9 +262,7 @@ const fetchMenu = async () => {
                       />
                     ) : (
                       <div className="text-xs text-gray-600 truncate" title={item.description}>
-                        {item.description && item.description.length > 30
-                          ? item.description.substring(0, 30) + "..."
-                          : item.description}
+                        {item.description}
                       </div>
                     )}
                   </td>
