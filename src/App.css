@@ -148,7 +148,7 @@ input:focus-visible {
 /* Form container */
 form, 
 div.mb-6.p-6.border-2 {
-  background: #ffffff;
+  background: transparent;
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 24px;
